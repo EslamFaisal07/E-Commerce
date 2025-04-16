@@ -1,5 +1,7 @@
 
+using DomainLayer.Contracts;
 using Microsoft.EntityFrameworkCore;
+using Presistence;
 using Presistence.Data;
 
 namespace E_Commerce.web
@@ -27,6 +29,7 @@ namespace E_Commerce.web
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            builder.Services.AddScoped<IDataSeeding, DataSeeding>();
 
             #endregion
 
@@ -35,7 +38,11 @@ namespace E_Commerce.web
             var app = builder.Build();
 
 
+      using   var scope =  app.Services.CreateScope();
 
+         var serviceOfDataSeeding =    scope.ServiceProvider.GetRequiredService<IDataSeeding>();
+
+            serviceOfDataSeeding.DataSeed();
             #region Middlewares
 
             if (app.Environment.IsDevelopment())
