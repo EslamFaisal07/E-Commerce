@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Presistence;
 using Presistence.Data;
 using Presistence.Repositories;
+using Service;
 using Service.MappingProfiles;
+using ServiceAbstraction;
 
 namespace E_Commerce.web
 {
@@ -36,6 +38,8 @@ namespace E_Commerce.web
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
+
+            builder.Services.AddScoped<IServiceManager, ServiceManager>(); 
 
 
             #endregion
