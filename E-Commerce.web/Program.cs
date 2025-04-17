@@ -75,6 +75,8 @@ namespace E_Commerce.web
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+
             //app.UseAuthorization();
 
 
