@@ -10,7 +10,7 @@ namespace DomainLayer.Contracts
     {
 
 
-       void DataSeed();
+       Task DataSeedAsync();
 
 
 

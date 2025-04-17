@@ -3,12 +3,13 @@ using DomainLayer.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Presistence;
 using Presistence.Data;
+using Presistence.Repositories;
 
 namespace E_Commerce.web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
           
@@ -31,18 +32,31 @@ namespace E_Commerce.web
 
             builder.Services.AddScoped<IDataSeeding, DataSeeding>();
 
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             #endregion
 
+            #region data seeding
 
 
             var app = builder.Build();
 
 
-      using   var scope =  app.Services.CreateScope();
+            using var scope = app.Services.CreateScope();
 
-         var serviceOfDataSeeding =    scope.ServiceProvider.GetRequiredService<IDataSeeding>();
+            var serviceOfDataSeeding = scope.ServiceProvider.GetRequiredService<IDataSeeding>();
 
-            serviceOfDataSeeding.DataSeed();
+             await serviceOfDataSeeding.DataSeedAsync();
+
+
+            #endregion
+
+
+
+
+
+
+
             #region Middlewares
 
             if (app.Environment.IsDevelopment())
@@ -56,7 +70,7 @@ namespace E_Commerce.web
             //app.UseAuthorization();
 
 
-            app.MapControllers(); 
+            app.MapControllers();
 
 
 
