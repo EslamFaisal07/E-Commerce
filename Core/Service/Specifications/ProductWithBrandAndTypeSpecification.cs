@@ -40,6 +40,7 @@ namespace Service.Specifications
                     
                     break;
             }
+            ApplyPagination(queryParams.pageSize , queryParams.PageIndex);
 
         }
 

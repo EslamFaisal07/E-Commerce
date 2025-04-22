@@ -13,7 +13,7 @@ namespace ServiceAbstraction
     {
 
 
-        Task<IEnumerable<ProductDTo>> GetAllProductsAsync(ProductQueryParams queryParams);
+        Task<PaginatedResult<ProductDTo>> GetAllProductsAsync(ProductQueryParams queryParams);
 
 
         Task<ProductDTo> GetByIdAsync(int id);

@@ -27,7 +27,7 @@ namespace DomainLayer.Contracts
         void DeleteAsync(TEntity entity);
 
 
-
+        Task<int> CountAsync(ISpecifications<TEntity, TKey> specifications);
 
 
 
