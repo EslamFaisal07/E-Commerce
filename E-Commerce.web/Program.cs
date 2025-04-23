@@ -1,5 +1,6 @@
 
 using DomainLayer.Contracts;
+using E_Commerce.web.CustomMiddleWares;
 using Microsoft.EntityFrameworkCore;
 using Presistence;
 using Presistence.Data;
@@ -66,6 +67,9 @@ namespace E_Commerce.web
 
 
             #region Middlewares
+
+            app.UseMiddleware<CustomExceptionHandlerMiddelWare>();
+
 
             if (app.Environment.IsDevelopment())
             {
