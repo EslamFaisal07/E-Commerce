@@ -67,6 +67,12 @@ namespace E_Commerce.web
 
             #region Middlewares
 
+
+
+
+
+
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
