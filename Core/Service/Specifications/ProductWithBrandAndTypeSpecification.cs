@@ -1,4 +1,4 @@
-﻿using DomainLayer.Models;
+﻿using DomainLayer.Models.ProductModule;
 using Shared;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Service.Specifications
 {
-     class ProductWithBrandAndTypeSpecification : BaseSpecifications<Product , int>
+    class ProductWithBrandAndTypeSpecification : BaseSpecifications<Product , int>
     {
 
 
