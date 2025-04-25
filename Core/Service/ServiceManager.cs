@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public class ServiceManager(IUnitOfWork unitOfWork , IMapper mapper) : IServiceManager
+    public class ServiceManager(IUnitOfWork unitOfWork , IMapper mapper , IBasketRepository basketRepository) : IServiceManager
     {
 
         private readonly Lazy<IProductService> _LazyproductService = new Lazy<IProductService>(()=>new ProductService(unitOfWork,mapper));
@@ -17,9 +17,10 @@ namespace Service
         public IProductService productService => _LazyproductService.Value;
 
 
+        private readonly Lazy<IBasketServices> _LazybasketServices = new Lazy<IBasketServices>(() => new BasketService(basketRepository, mapper));
 
 
 
-
+        public IBasketServices BasketService => _LazybasketServices.Value;
     }
 }

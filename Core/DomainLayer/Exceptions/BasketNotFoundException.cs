@@ -13,7 +13,7 @@ namespace DomainLayer.Exceptions
         {
 
         }
-        {
+        
             
         }
 
@@ -21,4 +21,4 @@ namespace DomainLayer.Exceptions
 
 
     }
-}
+
