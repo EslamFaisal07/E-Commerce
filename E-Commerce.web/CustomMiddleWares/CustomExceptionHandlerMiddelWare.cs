@@ -48,7 +48,7 @@ namespace E_Commerce.web.CustomMiddleWares
         {
             var response = new ErrorToReturn()
             {
-                StatusCode = httpContext.Response.StatusCode,
+                //StatusCode = httpContext.Response.StatusCode,
                 ErrorMessage = ex.Message
             };
 
@@ -64,7 +64,7 @@ namespace E_Commerce.web.CustomMiddleWares
             httpContext.Response.ContentType = "application/json";
             // response object 
             // return object as json
-
+            response.StatusCode = httpContext.Response.StatusCode;
             await httpContext.Response.WriteAsJsonAsync(response);
         }
 
