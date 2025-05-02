@@ -1,0 +1,23 @@
+﻿using DomainLayer.Models.ProductModule;
+using Shared;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Service.Specifications
+{
+    internal class ProductCountSpescification : BaseSpecifications<Product , int>
+    {
+        public ProductCountSpescification(ProductQueryParams queryParams) : base(p => (!queryParams.BrandId.HasValue || p.BrandId == queryParams.BrandId) &&
+            (!queryParams.TypeId.HasValue || p.TypeId == queryParams.TypeId)
+            && (string.IsNullOrEmpty(queryParams.SearchValue) || p.Name.ToLower().Contains(queryParams.SearchValue.ToLower())))
+        {
+
+
+
+        }
+    }
+   
+}

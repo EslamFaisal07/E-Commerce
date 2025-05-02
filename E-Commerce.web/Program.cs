@@ -1,5 +1,9 @@
 
 using DomainLayer.Contracts;
+using E_Commerce.web.CustomMiddleWares;
+using E_Commerce.web.Extensions;
+using E_Commerce.web.Factories;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Presistence;
 using Presistence.Data;
@@ -7,6 +11,7 @@ using Presistence.Repositories;
 using Service;
 using Service.MappingProfiles;
 using ServiceAbstraction;
+using Shared.ErrorModels;
 
 namespace E_Commerce.web
 {
@@ -21,25 +26,19 @@ namespace E_Commerce.web
 
             
 
-            builder.Services.AddControllers();
+             builder.Services.AddControllers();
 
-            builder.Services.AddEndpointsApiExplorer();
-
-            builder.Services.AddSwaggerGen();
+             builder.Services.AddSwaggerServices();
 
 
-            builder.Services.AddDbContext<StoreDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
+             builder.Services.AddInfrastructureServices(builder.Configuration);
+ 
+             builder.Services.AddApplicationServices();
 
-            builder.Services.AddScoped<IDataSeeding, DataSeeding>();
 
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
+            builder.Services.AddWebApplicationServices();
 
-            builder.Services.AddScoped<IServiceManager, ServiceManager>(); 
 
 
             #endregion
@@ -47,14 +46,13 @@ namespace E_Commerce.web
             #region data seeding
 
 
+
             var app = builder.Build();
 
+            await app.SeedDataBaseAsync();
 
-            using var scope = app.Services.CreateScope();
 
-            var serviceOfDataSeeding = scope.ServiceProvider.GetRequiredService<IDataSeeding>();
 
-             await serviceOfDataSeeding.DataSeedAsync();
 
 
             #endregion
@@ -67,10 +65,11 @@ namespace E_Commerce.web
 
             #region Middlewares
 
+            app.UseCustomExceptionMiddleWare();
+
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerMiddleWares();
             }
 
             app.UseHttpsRedirection();

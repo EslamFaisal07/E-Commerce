@@ -4,24 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.DataTransferObjects
+namespace DomainLayer.Models.ProductModule
 {
-    public class ProductDTo
+    public class Product : BaseEntity<int>
     {
 
-        public int Id { get; set; }
         public string Name { get; set; } = null!;
-
         public string Description { get; set; } = null!;
         public string PictureUrl { get; set; } = null!;
-
 
         public decimal Price { get; set; }
 
 
-        public string BrandName { get; set; } = null!;
-        public string TypeName { get; set; } = null!;
 
+        public int BrandId { get; set; }//fk
+        public ProductBrand ProductBrand { get; set; }
+
+
+
+
+        public ProductType ProductType { get; set; }
+
+        public int TypeId { get; set; } //fk
 
 
 
