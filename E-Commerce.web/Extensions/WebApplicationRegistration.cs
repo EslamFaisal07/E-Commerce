@@ -12,6 +12,13 @@ namespace E_Commerce.web.Extensions
             var serviceOfDataSeeding = scope.ServiceProvider.GetRequiredService<IDataSeeding>();
 
             await serviceOfDataSeeding.DataSeedAsync();
+
+            await serviceOfDataSeeding.IdentityDataSeedAsync();
+
+           
+
+
+
         }
 
 
