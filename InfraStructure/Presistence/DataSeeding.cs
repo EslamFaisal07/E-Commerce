@@ -67,6 +67,26 @@ namespace Presistence
 
                 }
 
+
+
+
+                if (!_storeDbContext.Set<DeliveryMethod>().Any())
+                {
+                    var DeliveryMethodData = File.OpenRead(@"..\InfraStructure\Presistence\Data\DataSeed\delivery.json");
+                    var deliveryMethods = await JsonSerializer.DeserializeAsync<List<DeliveryMethod>>(DeliveryMethodData);
+
+                    if (deliveryMethods != null && deliveryMethods.Any())
+                    {
+                        await _storeDbContext.Set<DeliveryMethod>().AddRangeAsync(deliveryMethods);
+                    }
+
+
+                }
+
+
+
+
+
                 await _storeDbContext.SaveChangesAsync();
 
 
