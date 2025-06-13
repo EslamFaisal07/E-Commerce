@@ -35,7 +35,7 @@ namespace Service
             services.AddScoped<IBasketServices, BasketService>();
             services.AddScoped<Func<IBasketServices>>(provider => () => provider.GetRequiredService<IBasketServices>());
 
-
+            services.AddScoped<ICachService, CachService>();
 
             return services;
         }
