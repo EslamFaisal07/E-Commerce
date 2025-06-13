@@ -16,7 +16,7 @@ namespace Presentation.Controllers
     {
 
         // GET ALL PRODUCTS
-        [Authorize]
+      
         [HttpGet]
 
         public async Task<ActionResult<PaginatedResult<ProductDTo>>> GetAllProducts([FromQuery]ProductQueryParams queryParams)
