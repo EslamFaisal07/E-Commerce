@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.Attributes;
 using ServiceAbstraction;
 using Shared;
 using Shared.DataTransferObjects.ProductDTos;
@@ -16,9 +17,9 @@ namespace Presentation.Controllers
     {
 
         // GET ALL PRODUCTS
-        [Authorize]
+      
         [HttpGet]
-
+        [CachAttribute]
         public async Task<ActionResult<PaginatedResult<ProductDTo>>> GetAllProducts([FromQuery]ProductQueryParams queryParams)
         {
 
@@ -26,6 +27,7 @@ namespace Presentation.Controllers
             var products = await _serviceManager.productService.GetAllProductsAsync(queryParams);
             return Ok(products);
         }
+
 
         [HttpGet("{id:int}")]
 
@@ -42,7 +44,7 @@ namespace Presentation.Controllers
 
 
         [HttpGet("types")]
-         
+         [CachAttribute]
         public async Task<ActionResult<IEnumerable<TypeDTo>>> GetAllTypes()
         {
             var types = await _serviceManager.productService.GetAllTypesAsync();
@@ -51,6 +53,8 @@ namespace Presentation.Controllers
 
 
         [HttpGet("brands")]
+        [CachAttribute]
+
 
         public async Task<ActionResult<IEnumerable<BrandDTo>>> GetAllBrands()
         {

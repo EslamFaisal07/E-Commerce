@@ -15,6 +15,7 @@ using Service;
 using Service.MappingProfiles;
 using ServiceAbstraction;
 using Shared.ErrorModels;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace E_Commerce.web
 {
@@ -79,6 +80,7 @@ namespace E_Commerce.web
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwaggerMiddleWares();
+             
             }
 
             app.UseHttpsRedirection();
